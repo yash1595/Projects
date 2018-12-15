@@ -1,0 +1,11 @@
+objects = FSM_V2.o  a.out 
+edit	:	$(objects)
+FSM_V2.o : FSM_V2.c 
+	cc -c FSM_V2.c
+		    gcc FSM_V2.c -w	
+																
+a.out	: FSM_V2.o 
+		gcc FSM_V2.c -w
+		
+clean: 
+		rm edit $(objects)
