@@ -1,0 +1,73 @@
+/************************************************************************
+Author:Yash Gupte
+Project: FSM 
+Version: 02
+References: Making Embedded Systems - Elecia White
+*************************************************************************/
+#include <stdio.h>
+
+typedef enum { kRedState = 0, kYellowState = 1, kGreenState = 2 } tState;
+typedef enum { kRedLight = 0, kYellowLight = 1, kGreenLight = 2 } tLight;
+char* states[]={"Red\n","Yellow\n","Green\n"};
+tState currentState=kRedState;
+
+struct sStateTableEntry {
+    tLight light;       // all states have associated lights
+    tState goEvent;     // state to enter when go event occurs
+    tState stopEvent;   // ... when stop event occurs
+    tState timeoutEvent;// ... when timeout occurs
+};
+
+
+
+struct sStateTableEntry stateTable[] = {
+    { kRedLight, kGreenState, kRedState, kRedState}, // Red
+    { kYellowLight, kYellowState, kYellowState, kRedState}, // Yellow
+    { kGreenLight, kGreenState, kYellowState, kGreenState}, // Green
+};
+
+
+void HandleEventGo(void)
+{
+    //LightOff(currentState->light);
+    currentState = stateTable[currentState].goEvent;
+    printf("%s\n",states[currentState]);
+    //LightOn(currentState->light);
+}
+
+void HandleEventStop(void)
+{
+   // LightOff(currentState->light);
+    currentState = stateTable[currentState].stopEvent;
+    printf("%s\n",states[currentState]);
+    //LightOn(currentState->light);
+}
+
+void HandleEventTimeout(void)
+{
+    //LightOff(currentState->light);
+    currentState = stateTable[currentState].timeoutEvent;
+    printf("%s\n",states[currentState]);
+    //LightOn(currentState->light);
+}
+
+void (*EventHandler[3])(void);
+
+
+int main()
+{  
+    
+    int input=0;
+    EventHandler[0]=HandleEventGo;
+    EventHandler[1]=HandleEventStop;
+    EventHandler[2]=HandleEventTimeout;
+    while(1)
+    {
+        printf("Enter the state:0=Go\t1=Stop\t2=Timeout\n");
+        scanf("%d",&input);
+        if(input<3 && input>-1)(*EventHandler[input])();
+    }
+    
+
+    return 0;
+}
