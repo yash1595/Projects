@@ -1,10 +1,3 @@
 # Projects
-Academic Projects
-Folder Structure:  
-|  
-|  
-\FSM.C  \makefile \readme.md  
-|  
-|  
-FMS.C => Main code  
-makefile => Linux based  
+Contains Projects done independent of Academic Course work.  
+
