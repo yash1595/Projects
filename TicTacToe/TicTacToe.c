@@ -8,9 +8,9 @@ char lookUpPlayer[2]={'X','O'};
 char matrix[ROW][COL] = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
 int player = 0;
 int playerchanged=0;
-char* str;
 int count=0;
 char Names[2][10];
+
 void Display(void);
 int MoveCursor(void);
 int EnterValue(char,int,int);
@@ -21,7 +21,7 @@ void PlayerNames(void);
 int main(void)
 {	
 
-	int winner=0;
+	Winner winner=0;
 	Display();
 	PlayerNames();
 	while(1)
@@ -33,7 +33,7 @@ int main(void)
 		}
 		winner = CheckWinner();
 		if(count==9){printf("No Winner!\n");break;}
-		if(winner==1)
+		if(winner)
 		{
 		    printf("%s Wins!\n",Names[player]);
 		    break;
@@ -143,7 +143,7 @@ int CheckWinner()
 {	
 	if(count!=9)
 	{
-		 if((matrix[0][0]==matrix[0][1]) && (matrix[0][1]==matrix[0][2]) && (matrix[0][0]=='X' || matrix[0][0]=='O')){count++;return 1; }
+	     if((matrix[0][0]==matrix[0][1]) && (matrix[0][1]==matrix[0][2]) && (matrix[0][0]=='X' || matrix[0][0]=='O')){count++;return 1; }
 	else if((matrix[1][0]==matrix[1][1]) && (matrix[1][1]==matrix[1][2]) && (matrix[1][0]=='X' || matrix[1][0]=='O')){count++;return 1; }
 	else if((matrix[2][0]==matrix[2][1]) && (matrix[2][1]==matrix[2][2]) && (matrix[2][0]=='X' || matrix[2][0]=='O')){count++;return 1; }
 
@@ -154,6 +154,6 @@ int CheckWinner()
 	else if((matrix[0][0]==matrix[1][1]) && (matrix[1][1]==matrix[2][2]) && (matrix[0][0]=='X' || matrix[0][0]=='O')){count++;return 1;}
 	else if((matrix[0][2]==matrix[1][1]) && (matrix[1][1]==matrix[2][0]) && (matrix[0][2]=='X' || matrix[0][2]=='O')){count++;return 1;}
 	}		 
-	return 0;
+	return No;
 
 }
