@@ -3,19 +3,22 @@
 /******************************************************************
 ******************* Initiliazses the UCA0CTLW0 register************
 ******************************************************************/
-void SPI_Init(uint8_t ClockPhase,uint32_t ClockFreq,uint8_t MSB, uint8_t CharLen,uint16_t mode,uint16_t ClockSource,uint8_t DefinedClockSource)
+void SPI_Init(uint8_t ClockPhase,uint32_t ClockFreq,uint8_t MSB, uint8_t CharLen,uint16_t mode,uint16_t ClockSource)
 {	
-	/*Setting GPIO for the fucnctions*/
-	GPIO_SPI_SET();
+	/*Disable the SPI Module by writing UCSWRST=1*/
+	_UCA0CTLW0_->reset = SET;
 	/*Set up the the Bit values in SPI Control register*/
 	_UCA0CTLW0_->ClockSource=ClockSource;
 	_UCA0CTLW0_->Msb=Msb;
 	_UCA0CTLW0_->CharLen=CharLen;
 	_UCA0CTLW0_->mode=mode;
 	_UCA0CTLW0_->ClockPhase=ClockPhase;
-	_UCA0CTLW0_->reset = RESET;
+	/*Setting GPIO for the fucnctions*/
+	GPIO_SPI_SET();
 	/*Use the CS_getSMCLK() for calculating the bits to be written to UCA0BRW(Bit Rate Control Register)*/
 	_UCA0BRW_=CS_getSMCLK()/ClockFreq;		//Alt gt SMCLK frequency and check.
+	/*Enable the SPI Module.*/
+	_UCA0CTLW0_->reset = CLEAR;
 
 }
 /********************************************************************
