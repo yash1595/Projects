@@ -21,6 +21,8 @@
 #define LSB 		1
 #define BITS7 		1
 #define	BITS8 		0
+#define SET 		1
+#define CLEAR 		0
 
 /******************************************************************
 ***************Structure storing Register UCAxCTLW0****************
