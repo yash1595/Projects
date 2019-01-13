@@ -1,3 +1,3 @@
-# Projects
-Contains Projects done independent of Academic Course work.  
+# Shifted (This reposiroty is deprecated)
+All the above projects have been moved to separate repositories.
 
