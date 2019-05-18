@@ -32,7 +32,7 @@ int main(void)
 			playerchanged=MoveCursor();
 		}
 		winner = CheckWinner();
-		if(count==9){printf("No Winner!\n");break;}
+		if(count==9 && !winner){printf("No Winner!\n");break;}
 		if(winner)
 		{
 		    printf("%s Wins!\n",Names[player]);
