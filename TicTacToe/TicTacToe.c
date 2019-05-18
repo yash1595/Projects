@@ -153,7 +153,8 @@ int CheckWinner()
 
 	else if((matrix[0][0]==matrix[1][1]) && (matrix[1][1]==matrix[2][2]) && (matrix[0][0]=='X' || matrix[0][0]=='O')){count++;return 1;}
 	else if((matrix[0][2]==matrix[1][1]) && (matrix[1][1]==matrix[2][0]) && (matrix[0][2]=='X' || matrix[0][2]=='O')){count++;return 1;}
-	}		 
+	}
+	count+=1;
 	return No;
 
 }
